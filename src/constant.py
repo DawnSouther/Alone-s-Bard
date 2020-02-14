@@ -40,3 +40,9 @@ PITCH_KEY_MAP['Ab_5'] = [16, 54]
 PITCH_KEY_MAP['A_5'] = [16, 89]
 PITCH_KEY_MAP['Bb_5'] = [16, 55]
 PITCH_KEY_MAP['B_5'] = [16, 85]
+
+class GlobalBean:
+	hwnd = -1
+	midiBySelected = None
+	midiPlayStatus = False
+	currentThread = None
