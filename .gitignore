@@ -1,5 +1,5 @@
 .idea
-.vscode
+.vscode/
 build/
 dist/
 ff14-auto-midi.spec
