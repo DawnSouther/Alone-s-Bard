@@ -27,4 +27,4 @@ class MidiList(QWidget):
 	
 	def click(self, item):
 		GlobalBean.midiBySelected = self.midiDict.get(item.text(), None)
-		print(GlobalBean.midiBySelected)
+		# print(GlobalBean.midiBySelected)

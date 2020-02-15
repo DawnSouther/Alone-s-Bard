@@ -31,11 +31,12 @@ class MidiPlay(threading.Thread):
 					tickPer = (1/4)/(1/event.denominator)*pattern.resolution
 				elif type(event) == midi.SetTempoEvent:
 					tickPer = (60000000 / int(event.bpm)) / tickPer
-				elif type(event) == midi.NoteOnEvent:
-					print(event)
-					print(self._running)
+				elif type(event) == midi.NoteOnEvent and event.tick != 0:
+					time.sleep((tickPer * event.tick) / 1000000)
+				elif type(event) == midi.NoteOffEvent:
+					# print(event)
 					temp = PITCH_KEY_MAP.get(midi.NOTE_VALUE_MAP_FLAT[event.pitch], -1);
-					print(midi.NOTE_VALUE_MAP_FLAT[event.pitch])
+					# print(midi.NOTE_VALUE_MAP_FLAT[event.pitch])
 					if temp == -1:
 						pass
 					if type(temp) == list:
@@ -43,6 +44,5 @@ class MidiPlay(threading.Thread):
 					else:
 						Util.simpleKey(GlobalBean.hwnd, temp)
 					if event.tick != 0:
-						print((tickPer * event.tick) / 1000000)
-						# if ((tickPer * event.tick) / 10000 - 0.1) < 1:
-						time.sleep((tickPer * event.tick) / 1000000 - 0.1 if (tickPer * event.tick) / 1000000 - 0.1 > 0 else 0.1)
+						# print((tickPer * event.tick) / 1000000)
+						time.sleep((tickPer * event.tick) / 1000000 - 0.1 if (tickPer * event.tick) / 1000000 - 0.1 > 0 else 0)

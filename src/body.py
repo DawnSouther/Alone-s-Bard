@@ -43,8 +43,6 @@ class Body(QWidget):
         self.setFixedSize(600, 300)
         self.move(0, 0)
         self.setWindowTitle('MIDI自动演奏工具')
-        # self.setWindowFlags(QtCore.Qt.Widget) #取消置顶
-        print(self.windowFlags())
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.FramelessWindowHint) #置顶
         self.show()
     
@@ -96,7 +94,6 @@ class Body(QWidget):
     # 向窗口发送按键
     def clickKey(self):
         print(self.pid)
-        # print(key)
         # 只需要获取一次窗口，防止抖动
         win32gui.SetForegroundWindow (self.pid)
         time.sleep(0.3)
@@ -128,7 +125,6 @@ class Body(QWidget):
     def mousePressEvent(self, QMouseEvent):
         self.isPressed = True
         self.startMovePos = QMouseEvent.globalPos()
-        print(self.startMovePos)
 
     def mouseMoveEvent(self, QMouseEvent):
         if self.isPressed:

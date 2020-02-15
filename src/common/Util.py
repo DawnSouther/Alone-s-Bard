@@ -43,13 +43,13 @@ def resloveMidiEvent(pattern):
 		for event in trace:
 			if type(event) == midi.TimeSignatureEvent or type(event) == midi.SetTempoEvent:
 				list.append(event)
-			elif type(event) == midi.NoteOnEvent and event.tick != 0:
+			elif type(event) == midi.NoteOnEvent:
 				if event.velocity != 0:
 					list.append(event)
 				else:
-					index = negativeFor(list, event)
-					if index != -1:
-						list[index].tick += event.tick
+					list.append(midi.NoteOffEvent(tick=event.tick, velocity=event.velocity, pitch=event.pitch))
+			elif type(event) == midi.NoteOffEvent:
+				list.append(event)
 	return list
 					
 def negativeFor(list, item):
